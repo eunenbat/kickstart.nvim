@@ -1090,16 +1090,12 @@ require('lazy').setup({
       { '<leader>ws', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
     },
-    -- config = function()
-    --   require('auto-session').setup {
-    --     bypass_save_filetypes = { 'dashboard' }, -- or whatever dashboard you use
-    --   },
-    -- end,
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
-      bypass_save_filetypes = { 'alpha', 'dashboard' }, -- or whatever dashboard you use
+      auto_restore = false,
+      bypass_save_filetypes = { 'dashboard' }, -- or whatever dashboard you use
       -- ⚠️ This will only work if Telescope.nvim is installed
       -- The following are already the default values, no need to provide them if these are already the settings you want.
       session_lens = {
