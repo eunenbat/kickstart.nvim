@@ -177,11 +177,17 @@ vim.opt.confirm = true
 -- Use <leader>w to save the file
 -- vim.keymap.set('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
 
--- Next buffer
-vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
+-- -- Next buffer
+-- vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
+--
+-- -- Previous buffer
+-- vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = 'Previous buffer' })
 
 -- Previous buffer
-vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '[b', ':bprevious<CR>', { desc = 'Previous buffer' })
+
+-- Next buffer
+vim.keymap.set('n', ']b', ':bnext<CR>', { desc = 'Next buffer' })
 
 -- Close current buffer
 vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Delete buffer' })
