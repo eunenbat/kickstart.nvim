@@ -794,7 +794,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -880,11 +880,11 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        -- preset = 'super-tab',
+        preset = 'super-tab',
 
-        preset = 'default',
-        ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        -- preset = 'default',
+        -- ['<Tab>'] = { 'select_next', 'fallback' },
+        -- ['<S-Tab>'] = { 'select_prev', 'fallback' },
 
         -- preset = 'super-tab',
         -- ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
@@ -911,6 +911,9 @@ require('lazy').setup({
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
+        per_filetype = {
+          codecompanion = { 'codecompanion' },
+        },
       },
 
       snippets = { preset = 'luasnip' },
@@ -922,11 +925,12 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
+    opts_extend = { 'sources.default' },
   },
 
   {
