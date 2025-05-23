@@ -120,7 +120,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  vim.opt.clipboard = 'unnamed'
 end)
 
 -- Enable break indent
@@ -262,8 +262,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- 'zbirenbaum/copilot.lua',
-  --
+  'zbirenbaum/copilot.lua',
+
   -- {
   --   'zbirenbaum/copilot-cmp',
   --   config = function()
@@ -936,7 +936,7 @@ require('lazy').setup({
   {
     'karb94/neoscroll.nvim',
     config = function()
-      require('neoscroll').setup()
+      require('neoscroll').setup { mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>' } }
     end,
   },
   -- Auto Save
@@ -1001,58 +1001,28 @@ require('lazy').setup({
     -- 'folke/tokyonight.nvim',
     -- 'rebelot/kanagawa.nvim',
     -- 'nyoom-engineering/oxocarbon.nvim',
-    'scottmckendry/cyberdream.nvim',
+    -- 'scottmckendry/cyberdream.nvim',
+    '0xstepit/flow.nvim',
     lazy = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
-      vim.cmd 'colorscheme cyberdream'
+      vim.cmd 'colorscheme flow'
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      require('cyberdream').setup {
-        -- Set light or dark variant
-        variant = 'default', -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
 
-        -- Enable transparent background
-        transparent = true,
-
-        -- Reduce the overall saturation of colours for a more muted look
-        saturation = 0.8, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
-
-        -- Enable italics comments
-        italic_comments = false,
-
-        -- Replace all fillchars with ' ' for the ultimate clean look
-        hide_fillchars = true,
-
-        -- Apply a modern borderless look to pickers like Telescope, Snacks Picker & Fzf-Lua
-        borderless_pickers = false,
-
-        -- Set terminal colors used in `:terminal`
-        terminal_colors = true,
-
-        -- Improve start up time by caching highlights. Generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-        cache = false,
-
-        -- Disable or enable colorscheme extensions
-        extensions = {
-          telescope = true,
-          notify = true,
-          mini = true,
-        },
-      }
       -- vim.g.kanagawa_transparent = true -- Enable transparent background (optional)
       -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
 
-      vim.cmd [[
-        highlight Normal guibg=none
-      highlight NormalNC guibg=none
-      highlight EndOfBuffer guibg=none
-      highlight SignColumn guibg=none
-      highlight LineNr guibg=none
-      highlight VertSplit guibg=none
-    ]]
+      --   vim.cmd [[
+      --     highlight Normal guibg=none
+      --   highlight NormalNC guibg=none
+      --   highlight EndOfBuffer guibg=none
+      --   highlight SignColumn guibg=none
+      --   highlight LineNr guibg=none
+      --   highlight VertSplit guibg=none
+      -- ]]
     end,
   },
   { 'rebelot/kanagawa.nvim', lazy = false, priority = 1000 },
@@ -1062,6 +1032,31 @@ require('lazy').setup({
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
+  },
+  {
+    '0xstepit/flow.nvim',
+    lazy = false,
+    priority = 1000,
+    tag = 'v2.0.2',
+    opts = {
+      theme = {
+        style = 'dark', --  "dark" | "light"
+        contrast = 'high', -- "default" | "high"
+        transparent = true, -- true | false
+      },
+      colors = {
+        mode = 'default', -- "default" | "dark" | "light"
+        fluo = 'pink', -- "pink" | "cyan" | "yellow" | "orange" | "green"
+        custom = {
+          saturation = '', -- "" | string representing an integer between 0 and 100
+          light = '', -- "" | string representing an integer between 0 and 100
+        },
+      },
+      ui = {
+        borders = 'inverse', -- "theme" | "inverse" | "fluo" | "none"
+        aggressive_spell = false, -- true | false
+      },
+    },
   },
   { 'folke/tokyonight.nvim', lazy = false, priority = 1000 },
   { 'navarasu/onedark.nvim', lazy = false, priority = 1000 },
@@ -1113,6 +1108,21 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  -- {
+  --   'folke/noice.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- ifvyou lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     'MunifTanjim/nui.nvim',
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     'rcarriga/nvim-notify',
+  --   },
+  -- },
 
   {
     'rmagatti/auto-session',
